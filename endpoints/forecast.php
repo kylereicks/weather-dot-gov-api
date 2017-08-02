@@ -82,7 +82,7 @@ function get_weather_forecast( \WP_REST_Request $request ) {
 
 	$forecast_soap_client = new \SoapClient( 'http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl', array(
 		'trace' => 1,
-		'stream_context' => stream_context_create( array( 'http' => array( 'protocol_version' => 1.0 ) ) ),
+		'stream_context' => stream_context_create( array( 'http' => array( 'protocol_version' => 1.0, 'user_agent' => 'PHPSoapClient' ) ) ),
 	) );
 
 	$forecast_data = XML\xml_to_object($forecast_soap_client->__soapCall( 'NDFDgen', array(
@@ -183,6 +183,8 @@ function get_weather_forecast( \WP_REST_Request $request ) {
 			'iceaccum' => true,
 			'maxrh' => true,
 			'minrh' => true,
+			'tstmprb' => true,
+			'tstmcat' => true,
 		) ),
 	)));
 

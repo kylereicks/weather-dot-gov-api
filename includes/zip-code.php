@@ -107,7 +107,12 @@ function zip_code_to_latitude_longitude( $zip_code ) {
 		return false;
 	}
 
-	$weather_soap_client = new \SoapClient( 'http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl' );
+	$weather_soap_client = new \SoapClient( 'http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl', array(
+		'stream_context' => stream_context_create( array(
+			'http'=>array( 'user_agent' => 'PHPSoapClient' )
+		) ),
+		'connection_timeout' => 15,
+	) );
 
 	$latitude_longitude_object = new Latitude_Longitude( XML\xml_to_object( $weather_soap_client->__soapCall( 'LatLonListZipCode', array( 'zipCodeList' => $zip_code ) ) ) );
 
