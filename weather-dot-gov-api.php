@@ -26,7 +26,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'endpoints/forecast.php' );
 /**
  * Register REST Routes.
  *
- * Register the REST routs for the Alerts, Current Observations, Forecast, and Forecast Glance endpoints.
+ * Register the REST routes for the Alerts, Current Observations, Forecast, and Forecast Glance endpoints.
  *
  * @since 0.1.0
  *
